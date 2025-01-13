@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -7,11 +8,10 @@ import { CharacterResults } from '../models/character.model';
   providedIn: 'root',
 })
 export class CharacterService {
-  private url: string = 'https://rickandmortyapi.com/api/';
 
   constructor(private http: HttpClient) {}
 
   getCharacterList(): Observable<CharacterResults> {
-    return this.http.get<CharacterResults>(`${this.url + 'character'}`);
+    return this.http.get<CharacterResults>(`${environment.URLBASE + 'character'}`);
   }
 }

@@ -78,7 +78,10 @@ usando el mismo Pipe
 23) haremos un interceptor para que no se sature el servidor con cada peticion fallida y solo tenga que hacer una , por eso se intecepta con el interceptor 
 23.1) en nuestro app.confog tendremos que declarar e importar el interceptor provideHttpClient(withFetch(), withInterceptors([errorHandlerInterceptor , masInterceptores si es que se tienen ]))
 23.2) ng g interceptor core/interceptors/error-handler  (ng g i crea una interfas)
-24) agarraremos todo el pipe del servicio que manejava el error y lo traspasaremmos a el interceptor 
+24) agarraremos todo el pipe del servicio que manejava el error y lo traspasaremmos a el interceptor , podemos ahora de ahy si tuviermos otros servicios manejar sus errores en el interceptor 
+25) crearemos variables de entorno, con el comando ng generate environments
+26) moveremos el url base a  una variable de entorno y actualizaremos el get de nuestro servicio para tener nuestra variable disponible para diferentes servicios 
+
 
 
 

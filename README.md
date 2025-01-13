@@ -31,8 +31,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 2) bun init 
 3) bun install @angular/cli@latest o el numero de vercion que quieras , en este caso la 17 
 4) ng new AppnName
-5) ng g c ComponentName
-6) ng g s Servicename
+5) ng g c core/components ComponentName for wrap the list
+5.1) ng g core/components ''        '' for items
+6) ng g s services/Servicename
 7) configurar el httpRequest en el app.config 
 7.1) import { provideHttpClient } from '@angular/common/http';
 y dentro de providers provideHttpClient()
@@ -40,12 +41,45 @@ y dentro de providers provideHttpClient()
 10) crear el metodo dnetro del servicio GetData() el cual deve llevar un this.http.get()
 
 11) configurar el componente con los imports del ngOninit , PipeAsync 
-12) conectar el servicio con tu componente importandolo y creando el servicio en el constructor comoo privado 
+12) conectar el servicio con tu componente container importandolo y creando el servicio en el constructor comoo privado 
 13) creamos un observable para resivir los datos del servicio private tambien , recuerda poner el $ para sabver que es un observable 
 con el formato =   public RnMCharacter$! :Observable<Character>; el ! es para indicar que puede venir vacio 
 14) igualar nuestro observable en el oninit con nuestro servicio =  this.RnMCharacter$ = this.service.getCharacterList();
 
-15) 
+15) hacer la logica de nuestro componente Async para poder empezar a mostrar los datos con un if , y un for para que salga cada personaje 
+    @if (RnMCharacteResults$ |async; as resultObject ) {
+    <ul class="character-list">
+        @for (item of resultObject.results; track item.id) {
+            <li>
+                <app-rickandmorty-items/>
+            </li>
+      }
+    </ul>
+}
+15.1) agregar dentro nuestro for el commponente item para mostrar cada item
+16) agregar la propiedad en la etiqueta de el componente parde al hijo como el item definido en el for para que relacione la info
+<app-rickandmorty-items 
+                [RnMInfo]="item"
+                 />
+16.1) en nuestro componente hijo(item) declarar una @Input () NombreDelInput! : InterfasDelDato;  signo de exclamacion por si no existe 
+17) crear el css de nuestro componente contenedor para que se vea bien 
+18) crear el HTML de nuestro componente item para poder ver la informacion 
+19) css de nuestro componente item para que se vea bien 
+20) importar en el componente el CommonModule para poder usar directivas como el ngclass
+20.1) agregamos logica con el ngclass para mejorar la visualisacion 
+ EN ESTE PASO YA DEVERIAS DE PODER VER TU INFORMACION ACOMODADA CLARAMENTE EN TU SERVIDOR 
+
+21) Agregar el manejo de errores 
+agregaremos a nuestro servicio un Pipe en nuestro metodo Get para atrapar los errores importando  catchError, throwError de ngrx y el HttpErrorResponse 
+22) arregar tambien el string del error en nuestro componente contenedor para poderlo mostrar con nuestro componente de manejo de errores 
+usando el mismo Pipe
+22.1) agregar en el template de la pagina un if para mostrar el error 
+22.2) hacer otra Input en nuestro componente manejador de errores para pasar el error y mostrlo 
+23) haremos un interceptor para que no se sature el servidor con cada peticion fallida y solo tenga que hacer una , por eso se intecepta con el interceptor 
+23.1) en nuestro app.confog tendremos que declarar e importar el interceptor provideHttpClient(withFetch(), withInterceptors([errorHandlerInterceptor , masInterceptores si es que se tienen ]))
+23.2) ng g interceptor core/interceptors/error-handler  (ng g i crea una interfas)
+24) agarraremos todo el pipe del servicio que manejava el error y lo traspasaremmos a el interceptor 
+
 
 
 

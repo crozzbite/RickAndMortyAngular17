@@ -1,6 +1,7 @@
 
 export interface Character {
     id: string,
+    name:string,
     status: string,
     species :string,
     type: string,
@@ -17,7 +18,6 @@ export interface Character {
     episode: string[],
     url : string,
     created: string,
-  
   }
   
   export interface CharacterResults {

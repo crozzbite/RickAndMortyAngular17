@@ -6,8 +6,12 @@
                 [RnMInfo]="item"
                  />
             </li>
-                     
       }
     </ul>
-    
+}
+
+@if (errorMessage) {
+    <app-error-message-component
+    [errorMessage] = "errorMessage"
+    />
 }

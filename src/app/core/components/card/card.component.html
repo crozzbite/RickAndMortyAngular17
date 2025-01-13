@@ -1,0 +1,13 @@
+@if (RnMCharacteResults$ |async; as resultObject ) {
+    <ul class="character-list">
+        @for (item of resultObject.results; track item.id) {
+            <li>
+                <app-rickandmorty-items 
+                [RnMInfo]="item"
+                 />
+            </li>
+                     
+      }
+    </ul>
+    
+}

@@ -25,3 +25,27 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+***********pasos para haceer una peticion Rest API ********
+1) install bun, 
+2) bun init 
+3) bun install @angular/cli@latest o el numero de vercion que quieras , en este caso la 17 
+4) ng new AppnName
+5) ng g c ComponentName
+6) ng g s Servicename
+7) configurar el httpRequest en el app.config 
+7.1) import { provideHttpClient } from '@angular/common/http';
+y dentro de providers provideHttpClient()
+9) crear el  modelo de el API y el APi response , osea las interfases para poder darselas al objeto de typescript 
+10) crear el metodo dnetro del servicio GetData() el cual deve llevar un this.http.get()
+
+11) configurar el componente con los imports del ngOninit , PipeAsync 
+12) conectar el servicio con tu componente importandolo y creando el servicio en el constructor comoo privado 
+13) creamos un observable para resivir los datos del servicio private tambien , recuerda poner el $ para sabver que es un observable 
+con el formato =   public RnMCharacter$! :Observable<Character>; el ! es para indicar que puede venir vacio 
+14) igualar nuestro observable en el oninit con nuestro servicio =  this.RnMCharacter$ = this.service.getCharacterList();
+
+15) 
+
+
+

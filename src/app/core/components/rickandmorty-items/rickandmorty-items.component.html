@@ -2,7 +2,7 @@
     <h2>{{RnMInfo.name}}</h2>
     <p>{{RnMInfo.location.name}}</p>
 <p> Origen: {{RnMInfo.origin.name}}</p>    
-<img [src]="RnMInfo.image" alt="">
+<img [src]="RnMInfo.image" [alt]="RnMInfo.name">
 <p>{{RnMInfo.species}}</p>
 <p>{{RnMInfo.created | date}}</p>
 <!-- <p>{{RnMInfo.episode}}</p> -->

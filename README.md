@@ -33,6 +33,14 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 4) ng new AppnName
 5) ng g c core/components ComponentName for wrap the list
 5.1) ng g core/components ''        '' for items
+5.2) for bootstrap  in style.scss import 
+$primary: #900;
+$enable-shadows: true;
+$prefix: "mo-";
+
+// Then import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
 6) ng g s services/Servicename
 7) configurar el httpRequest en el app.config 
 7.1) import { provideHttpClient } from '@angular/common/http';
@@ -40,7 +48,7 @@ y dentro de providers provideHttpClient()
 9) crear el  modelo de el API y el APi response , osea las interfases para poder darselas al objeto de typescript 
 10) crear el metodo dnetro del servicio GetData() el cual deve llevar un this.http.get()
 
-11) configurar el componente con los imports del ngOninit , PipeAsync 
+11) configurar el componente contenedor con los imports del ngOninit , PipeAsync 
 12) conectar el servicio con tu componente container importandolo y creando el servicio en el constructor comoo privado 
 13) creamos un observable para resivir los datos del servicio private tambien , recuerda poner el $ para sabver que es un observable 
 con el formato =   public RnMCharacter$! :Observable<Character>; el ! es para indicar que puede venir vacio 
@@ -84,5 +92,5 @@ usando el mismo Pipe
 
 
 
-
+dinamic component creation 
 

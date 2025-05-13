@@ -8,9 +8,23 @@
 
 .character-list li {
     text-align: center;
-    border-color: black;
-    border-style: solid;
+    border: solid black 5px;
+    // border-color: black;
+    // border-style: solid;
     border-radius: 5%;
     background-color: aqua;
 
+}
+
+@media (max-width:768px) {
+    .character-list{
+        grid-template-columns: 1fr 1fr;
+    }
+    
+}
+@media (max-width:425px) {
+    .character-list{
+        grid-template-columns: 1fr ;
+    }
+    
 }

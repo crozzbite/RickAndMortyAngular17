@@ -1,10 +1,11 @@
 <div class="">
     <h2>{{RnMInfo.name}}</h2>
     <p>{{RnMInfo.location.name}}</p>
-<p> Origen: {{RnMInfo.origin.name}}</p>    
-<img [src]="RnMInfo.image" [alt]="RnMInfo.name">
+<p> Origen: {{RnMInfo.origin.name}}</p>
+<img [src]="RnMInfo.image" [alt]="RnMInfo.name" (click)="openModal()"> 
 <p>{{RnMInfo.species}}</p>
 <p>{{RnMInfo.created | date}}</p>
 <!-- <p>{{RnMInfo.episode}}</p> -->
 <h3 [ngClass]="{'dead': RnMInfo.status ==='Dead', 'alive': RnMInfo.status === 'Alive' }">{{RnMInfo.status}}</h3>
 </div>
+<ng-container #modalContainer></ng-container>

@@ -1,0 +1,14 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-button" (click)="closeModal()">X</button>
+      <h2>{{RnMInfo.name}}</h2>
+      <p>Location: {{RnMInfo.location.name}}</p>
+      <p>Origin: {{RnMInfo.origin.name}}</p>
+      <img [src]="RnMInfo.image" [alt]="RnMInfo.name">
+      <p>Species: {{RnMInfo.species}}</p>
+      <p>Created: {{RnMInfo.created | date}}</p>
+      <h3 [ngClass]="{'dead': RnMInfo.status === 'Dead', 'alive': RnMInfo.status === 'Alive'}">
+        {{RnMInfo.status}}
+      </h3>
+    </div>
+  </div>

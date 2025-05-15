@@ -91,6 +91,69 @@ usando el mismo Pipe
 26) moveremos el url base a  una variable de entorno y actualizaremos el get de nuestro servicio para tener nuestra variable disponible para diferentes servicios 
 
 
+*******pasos para hacer un componente dynamico con @viewChild ********
+1) crearemos 2 componentes (rickandmorty-item, y rickandmorty-modal), rickandmorty-item sera el que tenga el <ng-container #modalContainer></ng-container>
+donde #modalcontainer sera el componente dynamico creado 'rickandmorty-modal', 
 
-dinamic component creation 
+1.1) crearemos nuestro componente dynamic el cual sera rickandmorty-modal
+
+1.2) en nuesta app ya tenemos nuestro modelo para los datos que mostraremos , el cual vienen desde el componente contenedor asi que para que se muestren los datos usaremos la entrada de datos: 
+ @Input() RnMInfo!: Character; 
+ahora nos tocara poner un  @Output() close = new EventEmitter<void>(); 
+el cual nos ayudara con el evento de salida para cerrar nuestra modal,
+tambien en este paso aremos la funcion para manejar el cierre de nuestra modal 
+ closeModal() {
+    this.close.emit(); // Emite el evento de cierre
+  }
+  todo esto en nuestro componente dinamico rickandmorty-modal
+
+2) regresaremos  a nuestro componente contenedor (padre) y agregaremos el decorador 
+   @ViewChild('modalContainer', { read: ViewContainerRef }) modalContainer!: ViewContainerRef;
+   esto significa que tendremos la vista del componente dinamico dentificado como #modalContainer
+   y de ahy recibira la vista 
+   <!-- nota tambien puedes hacer vistas envevidas si es mas de 1 componente
+     @ViewChild('modalTemplate') modalTemplate!: TemplateRef<any>;
+  @ViewChild('modalContainer', { read: ViewContainerRef }) modalContainer!: ViewContainerRef; 
+    private viewRef: any; -->
+  private modalRef!: ComponentRef<RickAndMortyModalComponent>;
+  
+  2.1) en nuestro componente contenedor usaremos el metodo para limpiar la vista , crear el componente dinamico, pasar los datos al modal, y el evento de cierre del modal, en si todo su funcionamiento y metodos para cuando se abra nuestro modal 
+ openModal() {
+    // Limpia cualquier modal existente
+    this.modalContainer.clear();
+
+    // Crea el componente dinámico
+    this.modalRef = this.modalContainer.createComponent(RickAndMortyModalComponent);
+
+    // Pasa los datos al modal
+    this.modalRef.instance.RnMInfo = this.RnMInfo;
+
+    // Escucha el evento de cierre
+    this.modalRef.instance.close.subscribe(() => {
+      this.closeModal();
+    });
+}
+
+  closeModal() {
+    // Destruye el componente dinámico
+    if (this.modalRef) {
+      this.modalRef.destroy();
+    }
+  }
+
+  3) actualizaremos el html y css de nuestro rickandmorty-modal para que se vea la informacion y se vea como un modal de verdad , nos aseguraremos de  meter un boton que nos ayude a cerrar el modal, 
+  tambien uno de stop propagation para que no alla problemas de propagacion 
+  <div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-button" (click)="closeModal()">X</button>
+ ''   contenido de los datos ''
+     </div>
+</div>
+
+3.1)
+agregamos css para el modal  en el archivo rickandmorty-modal.css
+4)agregamos en e; template  la imagen de nuestro componente parde el evento para que se despliegue la modal
+  <img [src]="RnMInfo.image" [alt]="RnMInfo.name" (click)="openModal()">
+
+5) listo nuestro componente dinamico esta listo , no te olvides de importar tu componente en donde neceistes, ya sea en el module de angular si es verciones 15 o anterior , o en tu componente standalone para verciones 17 o superiores 
 
